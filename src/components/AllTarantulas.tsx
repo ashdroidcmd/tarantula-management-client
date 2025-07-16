@@ -23,17 +23,17 @@ const AllTarantulas = () => {
 const { data, error, loading } = useQuery(GET_TARANTULAS);
   if (loading) return <p>Data Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  
+
   return (
     <div className="App">
       <h1>Tarantulas</h1>
       <ul>
-        {data.findAll.map((t: any) => (
-          <li key={t.id}>
-            <strong>{t.name}</strong><br />
-            Habitat: {t.habitat?.name || 'N/A'}<br />
-            Life Stage: {t.lifeStage?.name || 'N/A'}<br />
-            Genus: {t.genus?.name || 'N/A'}
+        {data.findAll.map((tarantula: any) => (
+          <li key={tarantula.id}>
+            <strong>{tarantula.name}</strong><br />
+            Habitat: {tarantula.habitat?.name || 'N/A'}<br />
+            Life Stage: {tarantula.lifeStage?.name || 'N/A'}<br />
+            Genus: {tarantula.genus?.name || 'N/A'}
           </li>
         ))}
       </ul>
