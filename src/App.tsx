@@ -1,5 +1,6 @@
 import './App.css';
 import AllTarantulas from './components/AllTarantulas';
+import AddTarantula from './components/AddTarantula';
 import AddGenus from './components/AddGenus';
 import AllGenus from './components/AllGenus';
 import AddLifeStage from './components/AddLifeStage';
@@ -16,6 +17,7 @@ function App() {
     <AllLifeStages />
     <AddHabitat />
     <AllHabitat />
+    <AddTarantula />
     <AllTarantulas />
     </>
   );

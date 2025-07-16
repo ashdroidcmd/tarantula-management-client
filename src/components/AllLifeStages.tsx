@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useMutation, gql } from '@apollo/client';
 
 const GET_LIFE_STAGES = gql`
   query {
@@ -9,8 +9,28 @@ const GET_LIFE_STAGES = gql`
   }
 `;
 
+const DELETE_LIFESTAGES = gql`
+  mutation DeleteLifeStage($id: Int!) {
+    deleteLifeStage(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
 function AllLifeStages() {
-  const { data, loading, error } = useQuery(GET_LIFE_STAGES);
+  const { data, loading, error, refetch } = useQuery(GET_LIFE_STAGES);
+   const [deleteHabitat, { loading: deleting }] = useMutation(DELETE_LIFESTAGES);
+  
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteHabitat({ variables: { id } });
+      refetch(); // refetch the list after deletion
+    } catch (err) {
+      console.error('Failed to delete Habitat:', err);
+    }
+  };
 
   if (loading) return <p>Loading life stages...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -20,7 +40,10 @@ function AllLifeStages() {
       <ul>
         {data.lifeStages.map((stage: any) => (
           <li key={stage.id}>
-            {stage.id}. {stage.name}
+            {stage.id}. {stage.name}{''}
+            <button onClick={() => handleDelete(stage.id)} disabled={deleting}>
+              {deleting ? 'Deleting...' : 'Delete'}
+            </button>
           </li>
         ))}
       </ul>

@@ -31,12 +31,11 @@ function AllGenus() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading Genuses...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
-      <h2>All Genuses</h2>
       <ul>
         {data.genuses.map((genus: any) => (
           <li key={genus.id}>
