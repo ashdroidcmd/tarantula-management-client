@@ -18,6 +18,11 @@ const DELETE_HABITAT = gql`
   }
 `;
 
+type Habitat = {
+  id: number;
+  name: string;
+};
+
 function AllHabitat() {
   const { data, loading, error, refetch } = useQuery(GET_HABITATS);
   const [deleteHabitat, { loading: deleting }] = useMutation(DELETE_HABITAT);
@@ -37,7 +42,7 @@ function AllHabitat() {
   return (
     <div>
       <ul>
-        {data.habitats.map((habitat: any) => (
+        {data.habitats.map((habitat: Habitat) => (
           <li key={habitat.id}>
             {habitat.id}. {habitat.name}{' '}
             <button onClick={() => handleDelete(habitat.id)} disabled={deleting}>

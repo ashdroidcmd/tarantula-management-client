@@ -18,6 +18,11 @@ const DELETE_GENUS = gql`
   }
 `;
 
+type Genus = {
+  id: number;
+  name: string;
+};
+
 function AllGenus() {
   const { data, loading, error, refetch } = useQuery(GET_GENUSES);
   const [deleteGenus, { loading: deleting }] = useMutation(DELETE_GENUS);
@@ -37,7 +42,7 @@ function AllGenus() {
   return (
     <div>
       <ul>
-        {data.genuses.map((genus: any) => (
+        {data.genuses.map((genus: Genus) => (
           <li key={genus.id}>
             {genus.id}. {genus.name}{' '}
             <button onClick={() => handleDelete(genus.id)} disabled={deleting}>

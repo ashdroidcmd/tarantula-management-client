@@ -27,6 +27,23 @@ const DELETE_TARANTULA = gql`
   }
 `;
 
+type Tarantula = {
+  id: number;
+  name: string;
+  habitat: {
+    id?: number;
+    name: string;
+  } | null;
+  lifeStage: {
+    id?: number;
+    name: string;
+  } | null;
+  genus: {
+    id?: number;
+    name: string;
+  } | null;
+};
+
 const AllTarantulas = () => {
   const { data, error, loading, refetch } = useQuery(GET_TARANTULAS);
   const [deleteTarantula, { loading: deleting }] = useMutation(DELETE_TARANTULA);
@@ -47,7 +64,7 @@ const AllTarantulas = () => {
     <div className="App">
       <h1>Tarantulas</h1>
       <ul>
-        {data.findAll.map((tarantula: any) => (
+        {data.findAll.map((tarantula: Tarantula) => (
           <li key={tarantula.id}>
             <strong>{tarantula.name}</strong><br />
             Habitat: {tarantula.habitat?.name || 'N/A'}<br />
