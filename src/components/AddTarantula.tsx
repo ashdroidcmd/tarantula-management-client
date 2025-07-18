@@ -114,3 +114,7 @@ const AddTarantula = () => {
 };
 
 export default AddTarantula;
+
+
+// 5. Function Composition - Combining simple functions to build more complex functionality.
+// Example: handleChange and handleSubmit are composed to handle the form submission process.
